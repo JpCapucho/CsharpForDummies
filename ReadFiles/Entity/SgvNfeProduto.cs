@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReadFiles.Entity
 {
-    class SgvNfeProduto
+    public class SgvNfeProduto
     {
         public string filial { get; set; }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ReadFiles.Business
 {
-    class SgvNfeProdutoBusiness
+    public class SgvNfeProdutoBusiness
     {
         public SgvNfeProduto obterNfePeloNumero(string nfe_numero)
         {

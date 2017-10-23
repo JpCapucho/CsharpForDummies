@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReadFiles.Entity
 {
-    class SgvCobrado
+    public class SgvCobrado
     {
         public string numero_serie { get; set; }
 

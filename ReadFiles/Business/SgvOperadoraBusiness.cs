@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ReadFiles.Business
 {
-    class SgvOperadoraBusiness
+    public class SgvOperadoraBusiness
     {
         private readonly string arquivo_operadora = @"sgv_operadoras.csv";
         public List<Entity.SgvOperadora> ConverterArquivo(string arquivo)

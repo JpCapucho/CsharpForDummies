@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ReadFiles.Business
 {
-    class SgvCobradosBusiness
+    public class SgvCobradosBusiness
     {
         public SgvCobradosBusiness()
         {
