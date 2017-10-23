@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ReadFiles.Entity
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Table("sgv_operadora")]
     public class SgvOperadora
     {
