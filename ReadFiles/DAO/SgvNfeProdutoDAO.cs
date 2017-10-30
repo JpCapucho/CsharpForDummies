@@ -7,17 +7,24 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper.FluentMap.Mapping;
+using Dapper.FluentMap;
 
 namespace ReadFiles.DAO
 {
-    class SgvNfeProdutoDAO
+    internal class SgvNfeProdutoDAO
     {
+
         private string ConnectionString = ConfigurationManager.ConnectionStrings["AX"].ToString();
-        internal SgvNfeProduto ObterNfeProduto(string numero_nf)
+        internal SgvNfeProduto ObterNfeProduto(string numero_nfe)
         {
-            var query = (@"SELECT FD.FISCALDOCUMENTNUMBER AS numero_nf
-        , FD.FISCALDOCUMENTSERIES AS serie_nf
-         ,tipo_nf = CASE
+            using (var conn = new SqlConnection(ConnectionString))
+
+                try
+                {
+                    var query = @"SELECT FD.FISCALDOCUMENTNUMBER AS [numero_nf]
+        , FD.FISCALDOCUMENTSERIES AS [serie_nf]
+         ,[tipo_nf] = CASE
 
         WHEN FD.SPECIE = 0 THEN 'NFF'
 
@@ -26,16 +33,16 @@ namespace ReadFiles.DAO
         WHEN FD.SPECIE = 3 THEN 'CF'
 
         END
-		,CONVERT(CHAR, FD.FISCALDOCUMENTDATE, 103) AS data_nf
-		,V.VENDGROUP AS tipo_pedido
-        , V.PURCHID AS numero_pedido
-         , CONVERT(FLOAT, FL.LINENUM, 2) AS numero_linha
-		,FD.THIRDPARTYNAME AS razao_social_fornecedor
-        , FD.THIRDPARTYCNPJCPF AS cnpj_fornecedor
-         , FL.ITEMID AS item_longo
-          , FL.[DESCRIPTION] AS descricao
-		,CONVERT(FLOAT, FL.QUANTITY, 2) AS quantidade
-		,CONVERT(FLOAT, FL.LINEAMOUNT, 2) AS valor
+		,CONVERT(CHAR, FD.FISCALDOCUMENTDATE, 103) AS [data_nf]
+		,V.VENDGROUP AS [tipo_pedido]
+        , V.PURCHID AS [numero_pedido]
+         , CONVERT(FLOAT, FL.LINENUM, 2) AS [numero_linha]
+		,FD.THIRDPARTYNAME AS [razao_social_fornecedor]
+        , FD.THIRDPARTYCNPJCPF AS [cnpj_fornecedor]
+         , FL.ITEMID AS [item_longo]
+          , FL.[DESCRIPTION] AS [descricao]
+		,CONVERT(FLOAT, FL.QUANTITY, 2) AS [quantidade]
+		,CONVERT(FLOAT, FL.LINEAMOUNT, 2) AS [valor]
 
    FROM[DynamicsAX_PRD].[dbo].[FISCALDOCUMENT_BR]
         FD
@@ -66,15 +73,27 @@ I.[INVENTLOCATIONID] IN ('ENANG_ESTR'
 							,'VOUCH_RDC'))
 
   WHERE FD.DIRECTION = 1
-  AND nf_numero = @Nf_Numero
-  GROUP BY FD.FISCALDOCUMENTNUMBER, FD.FISCALDOCUMENTSERIES, FD.SPECIE, FD.FISCALDOCUMENTDATE, V.VENDGROUP, V.PURCHID
-  , FL.LINENUM, FD.THIRDPARTYNAME, FD.THIRDPARTYCNPJCPF, FL.ITEMID, FL.[DESCRIPTION], FL.QUANTITY, FL.LINEAMOUNT");
+  AND FD.FISCALDOCUMENTNUMBER = @Numero_nf";
 
-            using (var conn = new SqlConnection(ConnectionString))
-            {
-                var nf = conn.Query<SgvNfeProduto>(query, new { @Nf_Numero = numero_nf }).FirstOrDefault();
-                return nf;
-            }
+                    {
+                        var nf = conn.Query<SgvNfeProduto>(query, new { Numero_nf = numero_nfe }).FirstOrDefault();
+                        return nf;
+                    }
+
+                }
+                catch (SqlException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+        }
+
+        internal SgvNfeProduto ObterNfeProduto(SgvNfeProduto obj)
+        {
+            return ObterNfeProduto((string)obj.numero_nf);
         }
     }
 }

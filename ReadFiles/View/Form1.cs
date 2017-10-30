@@ -161,6 +161,7 @@ namespace ReadFiles
             btCobrado.Enabled = false;
             btbLerOperadora.Enabled = false;
             btbLerProduto.Enabled = false;
+            btGerarNfe.Enabled = false;
         }
 
         private void btCobrado_Click(object sender, EventArgs e)
@@ -180,9 +181,21 @@ namespace ReadFiles
         private void btVerificarNfeProduto_Click(object sender, EventArgs e)
         {
             var verificarNumeroNotaProduto = txtNfProduto.Text;
-            MessageBox.Show(verificarNumeroNotaProduto);
+            MessageBox.Show("Numero da Nf: " + verificarNumeroNotaProduto);
             var nota_produto = new SgvNfeProdutoBusiness();
             var result = nota_produto.obterNfePeloNumero(verificarNumeroNotaProduto);
+            MessageBox.Show("Processo Finalizado!");
+
+            SgvNfeProdutoBusiness nfe = new SgvNfeProdutoBusiness();
+            var num_nfe = nfe.validaNfeProduto(result);
+            if (num_nfe == true)
+            {
+                btGerarNfe.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Nota Fiscal não encontrada!");
+            }
         }
     }
 }

@@ -49,13 +49,13 @@ namespace ReadFiles.DAO
             }
         }
 
-        internal SgvCobrado ObterCobrado (string numero_serie)
+        internal SgvCobrado ObterCobrado (string numero_nf)
         {
-            var query = @"select * from [DCI_Core].[dbo].[sgv_cobrados] where numero_serie = @Numero_Serie";
+            var query = @"select FD.FISCALDOCUMENTNUMBER AS [numero_nf] from [DCI_Core].[dbo].[sgv_cobrados] where numero_serie = @Numero_Serie";
 
             using (var conn = new SqlConnection(ConnectionString))
             {
-                var cobrado = conn.Query<SgvCobrado>(query, new { Numero_Serie = numero_serie }).FirstOrDefault();
+                var cobrado = conn.Query<SgvCobrado>(query, new { Numero_Serie = numero_nf }).FirstOrDefault();
 
                 return cobrado;
             }

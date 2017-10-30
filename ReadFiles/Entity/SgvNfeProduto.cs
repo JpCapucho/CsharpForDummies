@@ -9,6 +9,7 @@ namespace ReadFiles.Entity
     /// <summary>
     /// 
     /// </summary>
+    /// 
     public class SgvNfeProduto
     {
         public string filial { get; set; }
@@ -23,7 +24,7 @@ namespace ReadFiles.Entity
 
         public string tipo_pedido { get; set; }
 
-        public long numero_pedido { get; set; }
+        public string numero_pedido { get; set; }
 
         public long numero_linha { get; set; }
 
