@@ -114,7 +114,7 @@ namespace ReadFiles
         {
             SgvProdutosBusiness atualizar = new SgvProdutosBusiness();
 
-            SgvProduto prod = new SgvProduto();
+            AxFiscalDOcumentLine prod = new AxFiscalDOcumentLine();
             prod.produto_id = 18439999;
             prod.operadora_id = 350;
             prod.valor_face = 20;
@@ -129,7 +129,7 @@ namespace ReadFiles
         {
             SgvProdutosBusiness inserir = new SgvProdutosBusiness();
 
-            SgvProduto prod = new SgvProduto();
+            AxFiscalDOcumentLine prod = new AxFiscalDOcumentLine();
             prod.produto_id = 58975;
             prod.operadora_id = 350;
             prod.valor_face = 35;
@@ -186,16 +186,16 @@ namespace ReadFiles
             var result = nota_produto.obterNfePeloNumero(verificarNumeroNotaProduto);
             MessageBox.Show("Processo Finalizado!");
 
-            SgvNfeProdutoBusiness nfe = new SgvNfeProdutoBusiness();
-            var num_nfe = nfe.validaNfeProduto(result);
-            if (num_nfe == true)
-            {
-                btGerarNfe.Enabled = true;
-            }
-            else
-            {
-                MessageBox.Show("Nota Fiscal não encontrada!");
-            }
+            //SgvNfeProdutoBusiness nfe = new SgvNfeProdutoBusiness();
+            //var num_nfe = nfe.validaNfeProduto(result);
+            //if (num_nfe == true)
+            //{
+            //    btGerarNfe.Enabled = true;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Nota Fiscal não encontrada!");
+            //}
         }
     }
 }

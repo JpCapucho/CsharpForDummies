@@ -10,13 +10,13 @@ namespace ReadFiles.DAO
 {
 
     /// <summary>
-    /// Centraliza o acesso a dados do tipo <see cref="SgvProduto"/>
+    /// Centraliza o acesso a dados do tipo <see cref="AxFiscalDOcumentLine"/>
     /// </summary>
     internal class SgvProdutosDAO
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DCI_Core"].ToString();
 
-        internal SgvProduto InserirProduto(SgvProduto obj)
+        internal AxFiscalDOcumentLine InserirProduto(AxFiscalDOcumentLine obj)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
@@ -48,14 +48,14 @@ namespace ReadFiles.DAO
         }
 
 
-        internal SgvProduto ObterProduto(long produto_id)
+        internal AxFiscalDOcumentLine ObterProduto(long produto_id)
         {
             var query = @"select * from [DCI_Core].[dbo].[sgv_produtos] where produto_id = @ProdutoId";
 
             using (var conn = new SqlConnection(ConnectionString))
             {
 
-                var produto = conn.Query<SgvProduto>(query, new { ProdutoId = produto_id }).FirstOrDefault();
+                var produto = conn.Query<AxFiscalDOcumentLine>(query, new { ProdutoId = produto_id }).FirstOrDefault();
 
                 return produto;
             }
@@ -63,7 +63,7 @@ namespace ReadFiles.DAO
         }
 
 
-        internal SgvProduto ObterProduto(SgvProduto obj)
+        internal AxFiscalDOcumentLine ObterProduto(AxFiscalDOcumentLine obj)
         {
             return ObterProduto((long)obj.produto_id);
         }
@@ -97,7 +97,7 @@ namespace ReadFiles.DAO
             }
         }
 
-        internal SgvProduto AtualizarProduto(SgvProduto obj)
+        internal AxFiscalDOcumentLine AtualizarProduto(AxFiscalDOcumentLine obj)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {

@@ -9,7 +9,7 @@ namespace ReadFiles.Entity
     /// <summary>
     /// Representa o arquivo sgv_produtos
     /// </summary>
-    public class SgvProduto
+    public class AxFiscalDOcumentLine
     {
         public long? produto_id { get; set; }
 

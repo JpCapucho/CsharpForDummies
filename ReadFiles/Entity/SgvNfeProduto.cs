@@ -49,5 +49,17 @@ namespace ReadFiles.Entity
         public long num_pedido_sgv { get; set; }
 
         public string tipo_pedido_sgv { get; set; }
+
+        private IList<AxFiscalDOcumentLine> linhaSgvProduto;
+
+        public IList<AxFiscalDOcumentLine> ListSgvProduto
+        {
+            get
+            {
+                if (linhaSgvProduto == null) linhaSgvProduto = new List<AxFiscalDOcumentLine>();
+                return linhaSgvProduto;
+            }
+            set { linhaSgvProduto = value; }
+        }
     }
 }

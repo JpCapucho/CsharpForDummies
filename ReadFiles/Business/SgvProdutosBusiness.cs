@@ -24,12 +24,12 @@ namespace ReadFiles.Business
 
         private readonly string arquivo_produto = @"sgv_produtos.csv";
 
-        public List<Entity.SgvProduto> ConverterArquivo(string arquivo)
+        public List<Entity.AxFiscalDOcumentLine> ConverterArquivo(string arquivo)
         {
             //verifica se o arquivo existe
             if (File.Exists(arquivo))
             {
-                var lista = new List<Entity.SgvProduto>();
+                var lista = new List<Entity.AxFiscalDOcumentLine>();
 
                 using (var writer = new StreamReader(arquivo))
                 {
@@ -51,7 +51,7 @@ namespace ReadFiles.Business
             }
         }
 
-        public Entity.SgvProduto Converter(string linha)
+        public Entity.AxFiscalDOcumentLine Converter(string linha)
         {
             //verificar o digito delimitador
             var ler = linha.Contains(';');
@@ -72,7 +72,7 @@ namespace ReadFiles.Business
             }
 
 
-            var produto = new Entity.SgvProduto();
+            var produto = new Entity.AxFiscalDOcumentLine();
 
             produto.produto_id = long.Parse(array[0].ToString());
             produto.operadora_id = long.Parse(array[1].ToString());
@@ -101,14 +101,14 @@ namespace ReadFiles.Business
             return false;
         }
 
-        public SgvProduto obterPeloId(long id)
+        public AxFiscalDOcumentLine obterPeloId(long id)
         {
             SgvProdutosDAO dao = new SgvProdutosDAO();
             return dao.ObterProduto(id);
 
         }
 
-        public SgvProduto obterPeloId(SgvProduto obj)
+        public AxFiscalDOcumentLine obterPeloId(AxFiscalDOcumentLine obj)
         {
             return obterPeloId((long)obj.produto_id);
         }
@@ -119,28 +119,28 @@ namespace ReadFiles.Business
             return dao.DeletarProduto(id);
         }
 
-        public SgvProduto atualizarProduto(SgvProduto id)
+        public AxFiscalDOcumentLine atualizarProduto(AxFiscalDOcumentLine id)
         {
             SgvProdutosDAO dao = new SgvProdutosDAO();
 
             return dao.AtualizarProduto(id);
         }
 
-        public SgvProduto inserirProduto(SgvProduto id)
+        public AxFiscalDOcumentLine inserirProduto(AxFiscalDOcumentLine id)
         {
             SgvProdutosDAO dao = new SgvProdutosDAO();
             return dao.InserirProduto(id);
         }
 
-        public void inserirProduto(List<SgvProduto> list)
+        public void inserirProduto(List<AxFiscalDOcumentLine> list)
         {
-            foreach (SgvProduto produto in list)
+            foreach (AxFiscalDOcumentLine produto in list)
             {
                 var retorno = atualizarProduto(produto);
             }
         }
 
-        public void inserirOuAtualizar(List<SgvProduto> list)
+        public void inserirOuAtualizar(List<AxFiscalDOcumentLine> list)
         {
             foreach (var item in list)
             {

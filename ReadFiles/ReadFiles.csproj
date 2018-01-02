@@ -71,10 +71,12 @@
     <Compile Include="Business\SgvNfeProdutoBusiness.cs" />
     <Compile Include="Business\SgvOperadoraBusiness.cs" />
     <Compile Include="Business\SgvProdutosBusiness.cs" />
+    <Compile Include="DAO\AxFiscalDocumentLineDAO.cs" />
     <Compile Include="DAO\SgvCobradoDAO.cs" />
     <Compile Include="DAO\SgvNfeProdutoDAO.cs" />
     <Compile Include="DAO\SgvOperadoraDAO.cs" />
     <Compile Include="DAO\SgvProdutosDAO.cs" />
+    <Compile Include="Entity\AxFiscalDocumentLine.cs" />
     <Compile Include="Entity\SgvCobrado.cs" />
     <Compile Include="Entity\SgvNfeProduto.cs" />
     <Compile Include="Entity\SgvOperadora.cs" />

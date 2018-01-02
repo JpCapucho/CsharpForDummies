@@ -10,16 +10,22 @@ namespace ReadFiles.Business
 {
     public class SgvNfeProdutoBusiness
     {
-        public SgvNfeProduto obterNfePeloNumero(string numero_nf)
+        //public SgvNfeProduto obterNfePeloNumero(string numero_nf)
+        //{
+        //    SgvNfeProdutoDAO dao = new SgvNfeProdutoDAO();
+        //    return dao.ObterNfeProduto(numero_nf);
+        //}
+
+        public List<SgvNfeProduto> obterNfePeloNumero(string numero_nf)
         {
             SgvNfeProdutoDAO dao = new SgvNfeProdutoDAO();
             return dao.ObterNfeProduto(numero_nf);
         }
 
-        public SgvNfeProduto obterNfePeloNumero(SgvNfeProduto obj)
-        {
-            return obterNfePeloNumero((string)obj.numero_nf);
-        }
+        //public SgvNfeProduto obterNfePeloNumero(SgvNfeProduto obj)
+        //{
+        //    return obterNfePeloNumero((string)obj.numero_nf);
+        //}
 
         public bool validaNfeProduto(SgvNfeProduto num_nfe)
         {

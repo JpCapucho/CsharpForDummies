@@ -1,6 +1,4 @@
-﻿using Dapper;
-using ReadFiles.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -9,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper.FluentMap.Mapping;
 using Dapper.FluentMap;
+using ReadFiles.Entity;
+using Dapper;
 
 namespace ReadFiles.DAO
 {
@@ -16,13 +16,10 @@ namespace ReadFiles.DAO
     {
 
         private string ConnectionString = ConfigurationManager.ConnectionStrings["AX"].ToString();
-        internal SgvNfeProduto ObterNfeProduto(string numero_nfe)
-        {
-            using (var conn = new SqlConnection(ConnectionString))
 
-                try
-                {
-                    var query = @"SELECT FD.FISCALDOCUMENTNUMBER AS [numero_nf]
+        internal List<SgvNfeProduto> ObterNfeProduto(string numero_nfe)
+        {
+            var query = @"SELECT FD.FISCALDOCUMENTNUMBER AS [numero_nf]
         , FD.FISCALDOCUMENTSERIES AS [serie_nf]
          ,[tipo_nf] = CASE
 
@@ -74,10 +71,20 @@ I.[INVENTLOCATIONID] IN ('ENANG_ESTR'
 
   WHERE FD.DIRECTION = 1
   AND FD.FISCALDOCUMENTNUMBER = @Numero_nf";
+            using (var conn = new SqlConnection(ConnectionString))
+                try
+                {
 
                     {
-                        var nf = conn.Query<SgvNfeProduto>(query, new { Numero_nf = numero_nfe }).FirstOrDefault();
-                        return nf;
+                        //var nf = conn.Query<SgvNfeProduto>(query, new { Numero_nf = numero_nfe }).FirstOrDefault();
+                        //return nf;
+
+                        var nf = conn.Query<SgvNfeProduto, AxFiscalDOcumentLine, SgvNfeProduto>(query,
+                            (sgvNfe, FiscalLine) => { sgvNfe.ListSgvProduto.Add(FiscalLine); return sgvNfe; },
+                            new { Numero_nf = numero_nfe},
+                            splitOn: "Valor"
+                            );
+                        return nf.ToList();
                     }
 
                 }
@@ -89,11 +96,12 @@ I.[INVENTLOCATIONID] IN ('ENANG_ESTR'
                 {
                     throw ex;
                 }
+
         }
 
-        internal SgvNfeProduto ObterNfeProduto(SgvNfeProduto obj)
-        {
-            return ObterNfeProduto((string)obj.numero_nf);
-        }
+        //internal SgvNfeProduto ObterNfeProduto(SgvNfeProduto obj)
+        //{
+        //    return ObterNfeProduto((string)obj.numero_nf);
+        //}
     }
 }
