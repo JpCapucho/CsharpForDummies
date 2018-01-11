@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ReadFiles.Entity
 {
@@ -10,8 +7,11 @@ namespace ReadFiles.Entity
     /// 
     /// </summary>
     /// 
+    [Serializable]
     public class SgvNfeProduto
     {
+        public SgvNfeProduto() { }
+
         public string filial { get; set; }
 
         public string numero_nf { get; set; }
@@ -50,9 +50,9 @@ namespace ReadFiles.Entity
 
         public string tipo_pedido_sgv { get; set; }
 
-        private IList<AxFiscalDOcumentLine> linhaSgvProduto;
+        private List<AxFiscalDOcumentLine> linhaSgvProduto;
 
-        public IList<AxFiscalDOcumentLine> ListSgvProduto
+        public List<AxFiscalDOcumentLine> ListSgvProduto
         {
             get
             {

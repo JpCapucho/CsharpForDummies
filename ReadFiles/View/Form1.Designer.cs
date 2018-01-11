@@ -40,7 +40,6 @@
             this.btbInserir = new System.Windows.Forms.Button();
             this.btbLerOperadora = new System.Windows.Forms.Button();
             this.btCobrado = new System.Windows.Forms.Button();
-            this.btGerarNfe = new System.Windows.Forms.Button();
             this.txtNfProduto = new System.Windows.Forms.TextBox();
             this.btVerificarNfeProduto = new System.Windows.Forms.Button();
             this.lblNfeProduto = new System.Windows.Forms.Label();
@@ -146,17 +145,6 @@
             this.btCobrado.UseVisualStyleBackColor = true;
             this.btCobrado.Click += new System.EventHandler(this.btCobrado_Click);
             // 
-            // btGerarNfe
-            // 
-            this.btGerarNfe.Enabled = false;
-            this.btGerarNfe.Location = new System.Drawing.Point(31, 134);
-            this.btGerarNfe.Name = "btGerarNfe";
-            this.btGerarNfe.Size = new System.Drawing.Size(75, 23);
-            this.btGerarNfe.TabIndex = 10;
-            this.btGerarNfe.Text = "Gerar NFE";
-            this.btGerarNfe.UseVisualStyleBackColor = true;
-            this.btGerarNfe.Click += new System.EventHandler(this.btGerarNfe_Click);
-            // 
             // txtNfProduto
             // 
             this.txtNfProduto.Location = new System.Drawing.Point(31, 108);
@@ -170,7 +158,7 @@
             this.btVerificarNfeProduto.Name = "btVerificarNfeProduto";
             this.btVerificarNfeProduto.Size = new System.Drawing.Size(75, 20);
             this.btVerificarNfeProduto.TabIndex = 12;
-            this.btVerificarNfeProduto.Text = "Verifica NFE";
+            this.btVerificarNfeProduto.Text = "Gerar NFE";
             this.btVerificarNfeProduto.UseVisualStyleBackColor = true;
             this.btVerificarNfeProduto.Click += new System.EventHandler(this.btVerificarNfeProduto_Click);
             // 
@@ -191,7 +179,6 @@
             this.Controls.Add(this.lblNfeProduto);
             this.Controls.Add(this.btVerificarNfeProduto);
             this.Controls.Add(this.txtNfProduto);
-            this.Controls.Add(this.btGerarNfe);
             this.Controls.Add(this.btCobrado);
             this.Controls.Add(this.btbLerOperadora);
             this.Controls.Add(this.btbInserir);
@@ -222,7 +209,6 @@
         private System.Windows.Forms.Button btbInserir;
         private System.Windows.Forms.Button btbLerOperadora;
         private System.Windows.Forms.Button btCobrado;
-        private System.Windows.Forms.Button btGerarNfe;
         private System.Windows.Forms.TextBox txtNfProduto;
         private System.Windows.Forms.Button btVerificarNfeProduto;
         private System.Windows.Forms.Label lblNfeProduto;

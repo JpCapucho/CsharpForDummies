@@ -1,15 +1,6 @@
 ﻿using ReadFiles.Business;
 using ReadFiles.Entity;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ReadFiles
@@ -32,7 +23,7 @@ namespace ReadFiles
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "Cursor Files|*.csv";
             openFile.Title = "Selecione o arquivo!";
-            
+
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
@@ -55,14 +46,14 @@ namespace ReadFiles
             {
                 btbLerProduto.Enabled = true;
             }
-            else if (operadora == true){
+            else if (operadora == true)
+            {
                 btbLerOperadora.Enabled = true;
             }
             else if (cobrado == true)
             {
                 btCobrado.Enabled = true;
             }
-
         }
 
         private void btbLerProduto_Click(object sender, EventArgs e)
@@ -74,12 +65,12 @@ namespace ReadFiles
             //Grava o conteudo do arquivo no Banco de Dados
             buss.inserirOuAtualizar(result);
             //1,45s
-            MessageBox.Show("Processo finalizado!");  
+            MessageBox.Show("Processo finalizado!");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btbBuscar_Click(object sender, EventArgs e)
@@ -104,7 +95,8 @@ namespace ReadFiles
             SgvOperadoraBusiness delOperadora = new SgvOperadoraBusiness();
             var operadora = delOperadora.deletarOperadoraId(121);
 
-            if (!operadora){
+            if (!operadora)
+            {
                 MessageBox.Show("Um erro ocorreu, contate o administrador para obter ajuda.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -137,7 +129,7 @@ namespace ReadFiles
             prod.negociavel = 3;
             prod.valor_minimo = 3;
             prod.valor_maximo = 350;
-            var retorno = inserir.inserirProduto(prod);          
+            var retorno = inserir.inserirProduto(prod);
         }
 
         private void btbLerOperadora_Click(object sender, EventArgs e)
@@ -151,17 +143,11 @@ namespace ReadFiles
             MessageBox.Show("Processo finalizado!");
         }
 
-        private void comboSelecionarArquivo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void resetarBotoes()
         {
             btCobrado.Enabled = false;
             btbLerOperadora.Enabled = false;
             btbLerProduto.Enabled = false;
-            btGerarNfe.Enabled = false;
         }
 
         private void btCobrado_Click(object sender, EventArgs e)
@@ -173,11 +159,6 @@ namespace ReadFiles
             MessageBox.Show("Processo finalizado!");
         }
 
-        private void btGerarNfe_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btVerificarNfeProduto_Click(object sender, EventArgs e)
         {
             var verificarNumeroNotaProduto = txtNfProduto.Text;
@@ -186,16 +167,9 @@ namespace ReadFiles
             var result = nota_produto.obterNfePeloNumero(verificarNumeroNotaProduto);
             MessageBox.Show("Processo Finalizado!");
 
-            //SgvNfeProdutoBusiness nfe = new SgvNfeProdutoBusiness();
-            //var num_nfe = nfe.validaNfeProduto(result);
-            //if (num_nfe == true)
-            //{
-            //    btGerarNfe.Enabled = true;
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Nota Fiscal não encontrada!");
-            //}
+            SgvNfeProdutoBusiness sgvNfe = new SgvNfeProdutoBusiness();
+            sgvNfe.listNfe(result);
+
         }
     }
 }
